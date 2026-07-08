@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script>
+    (function () {
+      // 1. Instantly check localStorage
+      const storedMode = localStorage.getItem('themeMode') || 'system';
+      let actualMode = storedMode;
+
+      // 2. If it's system, check the hardware's preference immediately
+      if (storedMode === 'system') {
+        actualMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      // 3. Force the root background color to match the theme right now
+      if (actualMode === 'dark') {
+        document.documentElement.style.backgroundColor = '#121212';
+      } else {
+        document.documentElement.style.backgroundColor = '#ffffff';
+      }
+
+    })
+  </script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>drp_demo</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
