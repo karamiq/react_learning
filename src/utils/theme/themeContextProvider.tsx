@@ -6,12 +6,14 @@ import { CustomTheme } from "./theme";
 type ThemeContextType = {
     mode: 'light' | 'dark' | 'system';
     toggleColorMode: () => void;
+    setTheme: (mode: 'light' | 'dark' | 'system') => void;
     theme: Theme;
 };
 
 export const ThemeContext = React.createContext<ThemeContextType>({
     mode: 'light',
     toggleColorMode: () => { },
+    setTheme: () => { },
     theme: createTheme(),
 });
 
@@ -54,10 +56,15 @@ export const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
             return newMode;
         });
 
-    };
+    }
+    const setTheme = (mode: 'light' | 'dark' | 'system') => {
+        setMode(mode);
+        localStorage.setItem('themeMode', mode);
+    }
+
 
     return (
-        <ThemeContext.Provider value={{ mode, toggleColorMode, theme: modifiedTheme }}>
+        <ThemeContext.Provider value={{ mode, toggleColorMode, theme: modifiedTheme, setTheme }}>
             <ThemeProvider theme={modifiedTheme}>
                 <CssBaseline />
                 {children}
