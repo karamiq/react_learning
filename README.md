@@ -1,32 +1,50 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This project is a React application built with Vite, TypeScript, and Material UI.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm ci
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Available commands:
+
+- `npm run lint` checks the source with Oxlint.
+- `npm run typecheck` runs the TypeScript compiler without emitting files.
+- `npm run build` creates the production bundle in `dist`.
+- `npm run check` runs linting, type-checking, and the production build.
+- `npm run preview` serves the production bundle locally.
+
+## Container deployment
+
+The [`Dockerfile`](./Dockerfile) builds the application in a Node.js stage and
+serves the static output with Nginx. The image includes an SPA fallback so
+client-side routes continue to work on direct navigation.
+
+```bash
+docker build -t react-learning .
+docker run --rm -p 8080:80 react-learning
+```
+
+Open <http://localhost:8080> to verify the container locally. CI builds this
+image on every pull request and push to `main`.
+
+## CI/CD
+
+GitHub Actions runs [`npm run check`](./.github/workflows/ci.yml) for pull requests
+and pushes to `main`. This is the deployment gate and catches lint, TypeScript,
+and production-build failures.
+
+The [`Deploy to GitHub Pages`](./.github/workflows/deploy.yml) workflow builds
+the same artifact and deploys it to GitHub Pages after every push to `main`. It
+can also be started manually with **Run workflow**.
+
+Before the first deployment, configure the repository's **Settings → Pages →
+Build and deployment → Source** to **GitHub Actions**. The Vite base path is
+derived from `GITHUB_REPOSITORY`, so the workflow works with this repository
+name and does not require a hard-coded production URL.
+
+The application currently has no component-level test suite; CI's required
+checks are the lint, type-check, and production-build validation steps above.

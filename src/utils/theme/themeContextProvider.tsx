@@ -1,6 +1,6 @@
 import { CssBaseline, createTheme, useMediaQuery, type Theme } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import React, { useContext, useEffect, type FC, type PropsWithChildren } from "react";
+import React, { useContext, type FC, type PropsWithChildren } from "react";
 import { CustomTheme } from "./theme";
 
 type ThemeContextType = {

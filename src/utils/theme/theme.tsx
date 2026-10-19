@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 import type { PaletteOptions } from "@mui/material";
-import { amber, blue, green, deepPurple } from "@mui/material/colors";
+import { blue, green } from "@mui/material/colors";
 import { cyberpunkPalette, oceanPalette } from "./themesPalettes";
 
 export type ThemeModes = 'light' | 'dark';
@@ -31,4 +31,3 @@ export const CustomTheme = (mode: ThemeModes, theme: AvailableThemes | null) => 
         palette: selectedPalette,
     });
 }
-

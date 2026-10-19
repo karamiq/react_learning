@@ -1,9 +1,4 @@
-import { Container, Box, ListItemButton, ListItemIcon, Icon, ListItem, List, ListItemText, Stack, Button, ButtonGroup, Paper, Typography, Drawer } from "@mui/material";
-import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { useState } from "react";
-import Sidebar from "../../components/sidebar";
+import { Box, Stack, Paper, Typography } from "@mui/material";
 import { CustomDrawer } from "../../components/CustomDrawer";
 function Home() {
     return (

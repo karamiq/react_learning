@@ -1,34 +1,15 @@
 import {
     Container,
-    Paper,
-    Stack,
-    Typography,
-    TextField,
     Button,
-    Box,
-    InputAdornment,
-    IconButton,
-    Alert,
-    Switch,
     Menu,
     MenuItem,
-    FormControl,
-    Select,
-    InputLabel,
     ListItemIcon,
     ListItemText,
-    type SelectChangeEvent,
-    Drawer
 } from '@mui/material';
-import { LockOutlined, Visibility, VisibilityOff, Email } from '@mui/icons-material';
 import { useState } from 'react';
-import { Form, useActionData, useNavigation, useLocation } from 'react-router-dom';
-import { useThemeContext } from '../../utils/theme/themeContextProvider';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
-import type { ThemeModes } from '../../utils/theme/theme';
-import { amber } from '@mui/material/colors';
 
 export default function Login() {
 
